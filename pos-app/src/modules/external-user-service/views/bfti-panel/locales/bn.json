@@ -1,0 +1,20 @@
+ {
+    "bfti": {
+        "doc_type": "ডকুমেন্ট এর ধরণ",
+        "topic": "বিষয়",
+        "research_and_other_request": "গবেষণা এবং অন্যান্য অনুরোধ",
+        "description": "বর্ণনা",
+        "budget": "বাজেট",
+        "budget_source": "বাজেটের উৎস",
+        "duration": "সময়কাল",
+        "attachment": "সংযুক্তি",
+        "contact_person": "যোগাযোগকারী ব্যক্তির নাম",
+        "designation": "পদবি",
+        "organization": "সংগঠন",
+        "contact_number": "যোগাযোগকারী ব্যক্তির নম্বর",
+        "email": "ইমেইল",
+        "submission_date": "জমাদানের তারিখ",
+        "contact_information": "যোগাযোগের তথ্য",
+        "attachment_down": "সংযুক্তি ডাউনলোড করুন"
+    }
+}

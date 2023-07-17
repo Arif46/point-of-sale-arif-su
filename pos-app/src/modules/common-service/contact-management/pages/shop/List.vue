@@ -1,0 +1,430 @@
+<template>
+  <div class="inner-section">
+    <card>
+      <!-- search section start -->
+      <template v-slot:searchHeaderTitle>
+        <h4 class="card-title">Shop Entry Search</h4>
+      </template>
+      <template v-slot:searchBody>
+        <b-row>
+          <b-col xs="12" sm="12" md="4" lg="4" xl="4">
+            <b-form-group
+              label-for="area_type_id"
+            >
+              <template v-slot:label>
+               Area Type
+              </template>
+            <b-form-select
+                plain
+                v-model="search.area_type_id"
+                :options="areaTypeList"
+                id="area_type_id"
+                >
+            <template v-slot:first>
+                <b-form-select-option :value="0">{{$t('globalTrans.select')}}</b-form-select-option>
+            </template>
+            </b-form-select>
+            </b-form-group>
+          </b-col>
+          <b-col xs="12" sm="12" md="4" lg="4" xl="4">
+            <b-form-group
+              label-for="division_name"
+            >
+              <template v-slot:label>
+                {{ $t('orgProfile.division_name') }}
+              </template>
+            <b-form-select
+                plain
+                v-model="search.division_id"
+                :options="divisionList"
+                id="division_id"
+                >
+            <template v-slot:first>
+                <b-form-select-option :value="0">{{$t('globalTrans.select')}}</b-form-select-option>
+            </template>
+            </b-form-select>
+            </b-form-group>
+          </b-col>
+          <b-col xs="12" sm="12" md="4" lg="4" xl="4">
+            <b-form-group
+              label-for="district_name"
+            >
+              <template v-slot:label>
+                {{ $t('orgProfile.district_name') }}
+              </template>
+            <b-form-select
+                plain
+                v-model="search.district_id"
+                :options="districtList"
+                id="district_id"
+                >
+            <template v-slot:first>
+                <b-form-select-option :value="0">{{$t('globalTrans.select')}}</b-form-select-option>
+            </template>
+            </b-form-select>
+            </b-form-group>
+          </b-col>
+          <b-col xs="12" sm="12" md="4" lg="4" xl="4" v-if="search.area_type_id === 1">
+            <b-form-group
+              label-for="city_corporation_id"
+            >
+              <template v-slot:label>
+                City Corporation Name
+              </template>
+            <b-form-select
+                plain
+                v-model="search.city_corporation_id"
+                :options="cityCorporationList"
+                id="city_corporation_id"
+                >
+            <template v-slot:first>
+                <b-form-select-option :value="0">{{$t('globalTrans.select')}}</b-form-select-option>
+            </template>
+            </b-form-select>
+            </b-form-group>
+          </b-col>
+          <b-col xs="12" sm="12" md="4" lg="4" xl="4" v-if="search.area_type_id === 2 || search.area_type_id === 3">
+            <b-form-group
+              label-for="upazila_name"
+            >
+              <template v-slot:label>
+                {{ $t('orgProfile.upazila_name') }}
+              </template>
+            <b-form-select
+                plain
+                v-model="search.upazila_id"
+                :options="upazilaList"
+                id="upazila_id"
+                >
+            <template v-slot:first>
+                <b-form-select-option :value="0">{{$t('globalTrans.select')}}</b-form-select-option>
+            </template>
+            </b-form-select>
+            </b-form-group>
+          </b-col>
+          <b-col xs="12" sm="12" md="4" lg="4" xl="4" v-if="search.area_type_id === 2">
+            <b-form-group
+              label-for="paurashava_id"
+            >
+              <template v-slot:label>
+                Paurashava Name
+              </template>
+            <b-form-select
+                plain
+                v-model="search.paurashava_id"
+                :options="pauroshavaList"
+                id="paurashava_id"
+                >
+            <template v-slot:first>
+                <b-form-select-option :value="0">{{$t('globalTrans.select')}}</b-form-select-option>
+            </template>
+            </b-form-select>
+            </b-form-group>
+          </b-col>
+          <b-col xs="12" sm="12" md="4" lg="4" xl="4"  v-if="search.area_type_id === 3">
+            <b-form-group
+              label-for="union_name"
+            >
+              <template v-slot:label>
+                Union Name
+              </template>
+            <b-form-select
+                plain
+                v-model="search.union_id"
+                :options="unionList"
+                id="union_id"
+                >
+            <template v-slot:first>
+              <b-form-select-option :value="0">{{$t('globalTrans.select')}}</b-form-select-option>
+            </template>
+            </b-form-select>
+            </b-form-group>
+          </b-col>
+          <b-col xs="12" sm="12" md="4" lg="4" xl="4" v-if="search.area_type_id === 3">
+            <b-form-group
+              label-for="ward_name"
+            >
+              <template v-slot:label>
+                Ward Name
+              </template>
+            <b-form-select
+              plain
+              v-model="search.ward_id"
+              :options="wardList"
+              id="ward_id"
+              >
+            <template v-slot:first>
+              <b-form-select-option :value="0">{{$t('globalTrans.select')}}</b-form-select-option>
+            </template>
+            </b-form-select>
+            </b-form-group>
+          </b-col>
+          <b-col xs="12" sm="12" md="4" lg="4" xl="4">
+            <b-form-group
+              label-for="name"
+            >
+              <template v-slot:label>
+               Name
+              </template>
+              <b-form-input
+                  id="name"
+                  type="text"
+                  v-model="search.name"
+              ></b-form-input>
+            </b-form-group>
+          </b-col>
+          <b-col sm="4">
+            <b-button size="sm" variant="primary" class="mt-20" @click="searchData">
+              <i class="ri-search-line"></i> {{ $t('globalTrans.search') }}
+            </b-button>
+          </b-col>
+        </b-row>
+      </template>
+      <!-- search section end -->
+    </card>
+
+    <body-card>
+      <!-- table section start -->
+      <template v-slot:headerTitle>
+        <h4 class="card-title">Shop Entry List</h4>
+      </template>
+      <template v-slot:headerAction>
+        <a href="javascript:" class="btn-add" @click="resetId" v-b-modal.modal-form><i class="ri-add-fill"></i> {{ $t('globalTrans.add_new') }}</a>
+      </template>
+      <template v-slot:body>
+        <b-overlay :show="loadingState">
+          <base-table v-on:editMethodInParent="editMethodInParent" :labelData="labelData" :columns="columns" :search="search" :searchData="searchData" :paginations="pagination" :actions="actions" />
+        </b-overlay>
+      </template>
+      <!-- table section end -->
+    </body-card>
+    <b-modal id="modal-form" size="lg" :title="formTitle" hide-footer :ok-title="$t('globalTrans.close')" ok-only ok-variant="danger">
+      <Form :id="editItemId" :key="editItemId"/>
+    </b-modal>
+  </div>
+</template>
+<style scoped>
+table#table-transition-example .flip-list-move {
+  transition: transform 1s;
+}
+</style>
+<script>
+import Form from './Form.vue'
+import RestApi, { apiBaseUrl } from '@/config/api_config'
+import { shopEntryList, shopEntryToggle } from '../../api/routes'
+import ModalBaseMasterList from '@/mixins/list'
+import i18n from '@/i18n'
+
+const defaultColumn = [
+  { label_en: i18n.messages.en.globalTrans.sl_no, label_bn: i18n.messages.bn.globalTrans.sl_no, class: 'text-center', sortable: true, stickyColumn: true, show: '1', order: 1 },
+  { label_en: i18n.messages.en.orgProfile.area_type, label_bn: i18n.messages.bn.orgProfile.area_type_bn, class: 'text-center', sortable: true, stickyColumn: true, show: '1', order: 2 },
+  { label_en: i18n.messages.en.orgProfile.division_name, label_bn: i18n.messages.bn.orgProfile.division_name_bn, class: 'text-center', sortable: true, stickyColumn: true, show: '1', order: 3 },
+  { label_en: i18n.messages.en.orgProfile.district_name, label_bn: i18n.messages.bn.orgProfile.district_name_bn, class: 'text-center', sortable: true, stickyColumn: true, show: '1', order: 4 },
+  { label_en: i18n.messages.en.orgProfile._en, label_bn: i18n.messages.bn.orgProfile.name_bn, class: 'text-center', sortable: true, stickyColumn: true, show: '1', order: 5 },
+  { label_en: i18n.messages.en.globalTrans.status, label_bn: i18n.messages.bn.globalTrans.status, class: 'text-center', sortable: true, stickyColumn: true, show: '1', order: 6 },
+  { label_en: i18n.messages.en.globalTrans.action, label_bn: i18n.messages.bn.globalTrans.action, class: 'text-center', show: '1', order: 7 }
+]
+export default {
+  mixins: [ModalBaseMasterList],
+  components: {
+    Form
+  },
+  data () {
+    return {
+      transProps: {
+        name: 'flip-list'
+      },
+      sortBy: '',
+      search: {
+        name: '',
+        division_id: 0,
+        district_id: 0,
+        upazila_id: 0,
+        union_id: 0,
+        area_type_id: 0,
+        ward_id: 0,
+        city_corporation_id: 0,
+        paurashava_id: 0,
+        limit: 20
+      },
+      sortDesc: true,
+      sortDirection: 'desc',
+      labelData: [],
+      districtList: [],
+      upazilaList: [],
+      unionList: [],
+      cityCorporationList: [],
+      pauroshavaList: [],
+      wardList: [],
+      actions: {
+        edit: true,
+        toogle: true,
+        delete: false
+      }
+    }
+  },
+  created () {
+    this.labelData = this.labelList
+    this.loadData()
+  },
+  watch: {
+    'search.limit': function (newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.loadData()
+      }
+    },
+    'search.division_id': function (newVal, oldVal) {
+        this.search.district_id = 0
+        if (newVal !== oldVal) {
+            this.districtList = this.getDistrictList(newVal)
+        } else {
+            this.districtList = []
+        }
+    },
+    'search.district_id': function (newVal, oldVal) {
+        this.search.upazila_id = 0
+        if (newVal !== oldVal) {
+            this.upazilaList = this.getUpazilaList(newVal)
+            this.cityCorporationList = this.getCityCorporationList(newVal)
+        } else {
+            this.upazilaList = []
+            this.cityCorporationList = []
+        }
+    },
+    'search.upazila_id': function (newVal, oldVal) {
+      this.search.union_id = 0
+        if (newVal !== oldVal) {
+          this.unionList = this.getUnionList(newVal)
+          this.pauroshavaList = this.getPaurashavaList(newVal)
+        } else {
+          this.unionList = []
+          this.pauroshavaList = []
+        }
+    },
+    'search.union_id': function (newVal, oldVal) {
+        if (newVal !== oldVal) {
+          this.wardList = this.getWardList(newVal)
+        } else {
+          this.wardList = []
+        }
+      }
+  },
+  computed: {
+    labelList: function () {
+      const dataList = defaultColumn
+      return dataList.map(item => {
+        if (this.$i18n.locale === 'bn') {
+          const data = { value: item.label_en, text: item.label_bn }
+          return Object.assign({}, item, data)
+        } else {
+          const data = { value: item.label_en, text: item.label_en }
+          return Object.assign({}, item, data)
+        }
+      })
+    },
+    columns () {
+      const labelData = this.labelData
+      const labels = labelData.map((item, index) => {
+        const labelData = {}
+        labelData.label = this.$i18n.locale === 'bn' ? item.label_bn : item.label_en
+        return Object.assign(item, labelData)
+      })
+      let keys = []
+        keys = [
+          { key: 'serial' },
+          { key: 'area_type_name' },
+          { key: 'division_name' },
+          { key: 'district_name' },
+          { key: 'name' },
+          { key: 'status' },
+          { key: 'action' }
+        ]
+      return labels.map((item, index) => {
+        return Object.assign(item, keys[index])
+      })
+    },
+    formTitle () {
+      return (this.editItemId === 0) ? 'Shop Entry' : 'Shop Modified'
+    },
+    pageOptions () {
+      return this.$store.state.commonObj.pageOptions
+    },
+    currentLocale () {
+      return this.$i18n.locale
+    },
+    divisionList () {
+      return this.$store.state.CommonService.commonObj.divisionList.filter(item => item.status === 1)
+    },
+    areaTypeList () {
+      return this.$store.state.CommonService.commonObj.areaTypeList
+    }
+  },
+  methods: {
+    editMethodInParent (item, type) {
+      if (type === 1) {
+        this.edit(item)
+      } else if (type === 2) {
+        this.changeStatus(1, apiBaseUrl, shopEntryToggle, item)
+      }
+    },
+    searchData () {
+      this.loadData()
+    },
+    async loadData () {
+      const params = Object.assign({}, this.search, { page: this.pagination.currentPage, per_page: this.pagination.perPage })
+      this.$store.dispatch('mutateCommonProperties', { loading: true, listReload: false })
+      const result = await RestApi.getData(apiBaseUrl, shopEntryList, params)
+      if (result.success) {
+        const listData = result.data.data.map((item, index) => {
+        const divisionObj = this.$store.state.CommonService.commonObj.divisionList.find(division => division.value === parseInt(item.division_id))
+        const districtObj = this.$store.state.CommonService.commonObj.districtList.find(district => district.value === parseInt(item.district_id))
+        const areaTypeObj = this.$store.state.CommonService.commonObj.areaTypeList.find(area => area.value === parseInt(item.area_type_id))
+        const divisionData = {}
+        const districtData = {}
+        const areaTypeData = {}
+            if (typeof divisionObj !== 'undefined') {
+              divisionData.division_name = divisionObj.text
+            } else {
+              divisionData.division_name = ''
+            }
+            if (typeof districtObj !== 'undefined') {
+              districtData.district_name = districtObj.text
+            } else {
+              districtData.district_name = ''
+            }
+            if (typeof areaTypeObj !== 'undefined') {
+              areaTypeData.area_type_name = areaTypeObj.text
+            } else {
+              areaTypeData.area_type_name = ''
+            }
+          return Object.assign({}, item, { serial: index }, divisionData, districtData, areaTypeData)
+        })
+        this.$store.dispatch('setList', listData)
+        this.paginationData(result.data, this.search.limit)
+      } else {
+        this.$store.dispatch('setList', [])
+        this.paginationData([])
+      }
+      this.$store.dispatch('mutateCommonProperties', { loading: false, listReload: false })
+    },
+    getDistrictList (id) {
+      return this.$store.state.CommonService.commonObj.districtList.filter(item => item.status === 1 && item.division_id === id)
+    },
+    getUpazilaList (id) {
+      return this.$store.state.CommonService.commonObj.upazilaList.filter(item => item.status === 1 && item.district_id === id)
+    },
+    getUnionList (Id) {
+      return this.$store.state.CommonService.commonObj.unionList.filter(item => item.status === 1 && item.upazila_id === Id)
+    },
+    getCityCorporationList (districtId) {
+      return this.$store.state.CommonService.commonObj.cityCorporationList.filter(item => item.status === 1 && item.district_id === districtId)
+    },
+    getPaurashavaList (upazilaId) {
+      return this.$store.state.CommonService.commonObj.paurashavaList.filter(item => item.status === 1 && item.upazila_id === upazilaId)
+    },
+    getWardList (unionId) {
+      return this.$store.state.CommonService.commonObj.wardList.filter(item => item.status === 1 && item.union_id === unionId)
+    }
+  }
+}
+</script>

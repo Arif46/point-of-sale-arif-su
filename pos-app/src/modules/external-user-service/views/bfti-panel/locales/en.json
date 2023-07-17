@@ -1,0 +1,20 @@
+{
+    "bfti": {
+        "doc_type": "Document Type",
+        "topic": "Topics",
+        "research_and_other_request": "Research And Other Request",
+        "description": "Description",
+        "budget": "Budget",
+        "budget_source": "Budget Source",
+        "duration": "Duration",
+        "attachment": "Attachment",
+        "contact_person": "Contact Person",
+        "designation": "Designation",
+        "organization": "Organization",
+        "contact_number": "Contact Number",
+        "email": "Email",
+        "submission_date": "Submission Date",
+        "contact_information": "Contact Information",
+        "attachment_down": "Download Attachment"
+    }
+}

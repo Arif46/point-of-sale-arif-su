@@ -1,0 +1,32 @@
+{
+    "menu":  {
+        "component": "কম্পোনেন্ট",
+        "component_list": "কম্পোনেন্ট তালিকা",
+        "component_name": "কম্পোনেন্ট নাম",
+        "component_name_en": "কম্পোনেন্ট নাম (ইংরেজি)",
+        "component_name_bn": "কম্পোনেন্ট নাম (বাংলা)",
+        "sorting_order": "সাজানোর ক্রম",
+        "sorting": "বাছাই করা",
+        "perpage": "প্রতি পৃষ্ঠা",
+        "select": "নির্বাচন করুন",
+        "asc": "নিম্নক্রম",
+        "desc": "ঊর্ধ্বক্রম",
+        "module": "মডিউল",
+        "module_name": "মডিউল নাম",
+        "module_name_bn": "মডিউল নাম (বাংলা)",
+        "module_name_en": "মডিউল নাম (ইংরেজি)",
+        "service": "সার্ভিস",
+        "service_name": "সার্ভিস নাম",
+        "service_name_bn": "সার্ভিস নাম (বাংলা)",
+        "service_name_en": "সার্ভিস নাম (ইংরেজি)",
+        "menu": "মেনু",
+        "menu_name": "মেনু নাম",
+        "menu_name_bn": "মেনু নাম (বাংলা)",
+        "menu_name_en": "মেনু নাম (ইংরেজি)",
+        "url": "ইউআরএল",
+        "associated_urls": "সহযোগী ইউআরএল",
+        "start_date": "শুরুর তারিখ",
+        "end_date": "শেষ তারিখ",
+        "welcome_ms_common_service_dashboard": "সাধারণ পরিষেবা কনফিগারেশনে স্বাগতম"
+    }
+}
